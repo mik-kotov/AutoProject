@@ -20,3 +20,7 @@ class LoginPage(BasePage):
     def should_be_register_form(self):
 
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), "Registration form is not presented"
+
+    ".product_main > :nth-child(1)" == ".alertinner:nth-child(1) > :nth-child(1)"
+
+    ".product_main > .price_color" == ".alertinner > p:nth-child(1) > :nth-child(1)"
