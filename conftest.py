@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
 
-link = "http://selenium1py.pythonanywhere.com/"
 
 def pytest_addoption(parser):
     parser.addoption('--language', action='store', default="en",
