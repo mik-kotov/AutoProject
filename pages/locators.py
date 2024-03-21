@@ -13,3 +13,9 @@ class ProductPageLocators():
 
     BUTTON_ADD_TO_BASKET = (By.CSS_SELECTOR, ".btn-add-to-basket")
     ALERT_ADD_TO_BASKET = (By.CSS_SELECTOR, ".alert-info")
+    BOOK_NAME_IN_THE_PRODUCT_CARD = (By.CSS_SELECTOR, ".product_main > :nth-child(1)")
+    BOOK_NAME_IN_THE_ALERT_OF_PRODUCT_ADDED = (By.CSS_SELECTOR,"#messages :nth-child(1) > .alertinner :nth-child(1)")
+    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main > .price_color")
+    BASKET_SUM_AFTER_PRODUCT_ADDED = (By.CSS_SELECTOR, ".alertinner > p:nth-child(1) > :nth-child(1)")
+
+
