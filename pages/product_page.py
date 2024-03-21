@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
+from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
 
@@ -7,8 +8,11 @@ class ProductPage(BasePage):
         button_add_to_basket = self.browser.find_element(*ProductPageLocators.BUTTON_ADD_TO_BASKET)
         button_add_to_basket.click()
 
-    def should_product_added_to_basket(self):
+    def should_product_added_to_basket_message(self):
         assert self.is_element_present(*ProductPageLocators.ALERT_ADD_TO_BASKET), "Product didn't added to the basket"
+
+    def should_not_product_added_to_basket_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.ALERT_ADD_TO_BASKET), "Success message is presented, but should not be"
 
     def should_be_same_names_of_products_in_card_and_in_alert(self):
         assert (self.browser.find_element(*ProductPageLocators.BOOK_NAME_IN_THE_PRODUCT_CARD).text ==
