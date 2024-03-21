@@ -4,6 +4,7 @@ import time
 import pytest
 from selenium.common.exceptions import NoAlertPresentException
 from .pages.locators import ProductPageLocators
+from .pages.locators import BasketPageLocators
 from .pages.base_page import BasePage
 
 def solve_quiz_and_get_code(self):
@@ -82,3 +83,24 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.open()
     page.add_product_to_basket()
     assert page.is_disappeared(*ProductPageLocators.ALERT_ADD_TO_BASKET), "Success message is presented, but should not be"
+
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()
+    time.sleep(2)
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_the_basket()
+    assert page.is_not_element_present(
+        *BasketPageLocators.SOME_PRODUCTS_IN_THE_BASKET), "The basket should be empty"
