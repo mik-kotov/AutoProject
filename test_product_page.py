@@ -3,6 +3,9 @@ import math
 import time
 import pytest
 from selenium.common.exceptions import NoAlertPresentException
+from .pages.locators import ProductPageLocators
+from .pages.base_page import BasePage
+
 def solve_quiz_and_get_code(self):
     alert = self.browser.switch_to.alert
     x = alert.text.split(" ")[2]
@@ -50,3 +53,32 @@ def test_searching_for_bad_number_in_promo_link(browser, number):
     solve_quiz_and_get_code(page)
     page.should_be_same_prices_in_cart_and_in_product_card()
     page.should_be_same_names_of_products_in_card_and_in_alert()
+
+
+def test_product_added_to_basket_message_when_open_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_product_added_to_basket_message()
+
+@pytest.mark.xfail
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_basket()
+    assert page.is_not_element_present(*ProductPageLocators.ALERT_ADD_TO_BASKET), "Success message is presented, but should not be"
+
+def test_guest_cant_see_success_message(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209"
+    page = ProductPage(browser, link)
+    page.open()
+    assert page.is_not_element_present(*ProductPageLocators.ALERT_ADD_TO_BASKET), "Success message is presented, but should not be"
+
+@pytest.mark.xfail
+def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_basket()
+    assert page.is_disappeared(*ProductPageLocators.ALERT_ADD_TO_BASKET), "Success message is presented, but should not be"
