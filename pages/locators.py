@@ -28,5 +28,6 @@ class ProductPageLocators():
 class BasketPageLocators():
 
     SOME_PRODUCTS_IN_THE_BASKET = (By.CSS_SELECTOR, ".basket-title.hidden-xs")
+    PRICE_OF_ITEM_IN_THE_BASKET = (By.CSS_SELECTOR, "#content_inner :nth-child(2)")
 
 

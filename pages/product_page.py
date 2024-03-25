@@ -1,6 +1,5 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
-from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
 

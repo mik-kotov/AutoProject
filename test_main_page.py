@@ -3,6 +3,7 @@ from .pages.login_page import LoginPage
 from .pages.base_page import BasePage
 from .pages.product_page import ProductPageLocators
 from .pages.locators import BasketPageLocators
+from .pages.basket_page import BasketPage
 import time
 import pytest
 
@@ -36,11 +37,9 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     link = "http://selenium1py.pythonanywhere.com"
     page = MainPage(browser, link)
     page.open()
-    time.sleep(20)
     page.go_to_the_basket()
-    assert page.is_not_element_present(
-        *BasketPageLocators.SOME_PRODUCTS_IN_THE_BASKET), "The basket should be empty"
-
+    basket_page = BasketPage(browser, link)
+    basket_page.should_be_only_message_of_basket_is_empty()
 
 
 
