@@ -17,8 +17,6 @@ class ProductPage(BasePage):
         assert self.is_disappeared(
             *ProductPageLocators.ALERT_ADD_TO_BASKET), "Success message is presented, but should not be"
 
-
-
     def should_be_same_names_of_products_in_card_and_in_alert(self):
         assert (self.browser.find_element(*ProductPageLocators.BOOK_NAME_IN_THE_PRODUCT_CARD).text ==
                 self.browser.find_element(*ProductPageLocators.BOOK_NAME_IN_THE_ALERT_OF_PRODUCT_ADDED).text), "Names are not same"
